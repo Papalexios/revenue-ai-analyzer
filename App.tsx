@@ -7,11 +7,13 @@ import ContentInput from './components/ContentInput';
 import AnalysisDashboard from './components/AnalysisDashboard';
 import CompetitorAnalysis from './components/CompetitorAnalysis';
 import ABTesting from './components/ABTesting';
+import Resources from './components/Resources';
 
 enum AppView {
   MAIN_ANALYSIS,
   COMPETITOR_ANALYSIS,
-  AB_TESTING
+  AB_TESTING,
+  RESOURCES
 }
 
 export default function App() {
@@ -67,6 +69,8 @@ export default function App() {
         return <CompetitorAnalysis onAnalyze={handleAnalysis} isLoading={isLoading} error={error} />;
       case AppView.AB_TESTING:
         return <ABTesting variations={abTestVariations} onGenerate={handleGenerateABTests} isLoading={isLoading} error={error} />;
+      case AppView.RESOURCES:
+        return <Resources />;
       default:
         return <AnalysisDashboard result={analysisResult} originalContent={content} isLoading={isLoading} error={error} />;
     }
@@ -87,10 +91,11 @@ export default function App() {
           </div>
 
           <div className="bg-slate-800/50 rounded-2xl shadow-2xl ring-1 ring-white/10 min-h-[600px] p-2">
-            <nav className="flex items-center space-x-2 bg-slate-900/70 p-2 rounded-t-xl">
-              <button onClick={() => setCurrentView(AppView.MAIN_ANALYSIS)} className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${currentView === AppView.MAIN_ANALYSIS ? 'bg-sky-600 text-white' : 'text-slate-300 hover:bg-slate-700'}`}>Revenue Analysis</button>
-              <button onClick={() => setCurrentView(AppView.COMPETITOR_ANALYSIS)} className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${currentView === AppView.COMPETITOR_ANALYSIS ? 'bg-sky-600 text-white' : 'text-slate-300 hover:bg-slate-700'}`}>Competitor Intel</button>
-              <button onClick={() => setCurrentView(AppView.AB_TESTING)} className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${currentView === AppView.AB_TESTING ? 'bg-sky-600 text-white' : 'text-slate-300 hover:bg-slate-700'}`}>A/B Simulator</button>
+            <nav className="flex items-center space-x-2 bg-slate-900/70 p-2 rounded-t-xl overflow-x-auto">
+              <button onClick={() => setCurrentView(AppView.MAIN_ANALYSIS)} className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${currentView === AppView.MAIN_ANALYSIS ? 'bg-sky-600 text-white' : 'text-slate-300 hover:bg-slate-700'}`}>Revenue Analysis</button>
+              <button onClick={() => setCurrentView(AppView.COMPETITOR_ANALYSIS)} className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${currentView === AppView.COMPETITOR_ANALYSIS ? 'bg-sky-600 text-white' : 'text-slate-300 hover:bg-slate-700'}`}>Competitor Intel</button>
+              <button onClick={() => setCurrentView(AppView.AB_TESTING)} className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${currentView === AppView.AB_TESTING ? 'bg-sky-600 text-white' : 'text-slate-300 hover:bg-slate-700'}`}>A/B Simulator</button>
+              <button onClick={() => setCurrentView(AppView.RESOURCES)} className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${currentView === AppView.RESOURCES ? 'bg-sky-600 text-white' : 'text-slate-300 hover:bg-slate-700'}`}>Resources</button>
             </nav>
             <div className="p-6">
               {renderCurrentView()}

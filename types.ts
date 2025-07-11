@@ -20,3 +20,9 @@ export interface AnalysisResult {
 export interface ABTestVariation {
   text: string;
 }
+
+export interface ResourceLink {
+  title: string;
+  url: string;
+  category: string;
+}
